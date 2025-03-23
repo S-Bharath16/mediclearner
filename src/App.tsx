@@ -9,6 +9,7 @@ import DiabetesPrediction from "./pages/DiabetesPrediction";
 import HeartDiseasePrediction from "./pages/HeartDiseasePrediction";
 import LungCancerPrediction from "./pages/LungCancerPrediction";
 import StrokeRiskPrediction from "./pages/StrokeRiskPrediction";
+import ChatbotService from "./pages/ChatbotService";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/heart" element={<HeartDiseasePrediction />} />
           <Route path="/lung" element={<LungCancerPrediction />} />
           <Route path="/stroke" element={<StrokeRiskPrediction />} />
+          <Route path="/chatbot" element={<ChatbotService />} />
           <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

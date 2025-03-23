@@ -1,5 +1,5 @@
 
-import { Activity, Heart, Brain } from "lucide-react";
+import { Activity, Heart, Brain, MessageCircle } from "lucide-react";
 import Layout from "../components/Layout";
 import ServiceCard from "../components/ServiceCard";
 
@@ -28,6 +28,12 @@ const Index = () => {
       description: "Analyze factors that may contribute to the risk of stroke.",
       icon: Brain,
       path: "/stroke",
+    },
+    {
+      title: "AI Medical Chatbot",
+      description: "Get instant answers to your medical questions from our AWS-powered AI assistant.",
+      icon: MessageCircle,
+      path: "/chatbot",
     },
   ];
 
