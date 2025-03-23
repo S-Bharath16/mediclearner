@@ -63,33 +63,6 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="animate-slide-up">
-        <div className="bg-gradient-to-r from-medical-50 to-blue-50 rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-semibold mb-4">
-            Powered by Advanced AI
-          </h2>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Our prediction services leverage Microsoft Azure and AWS machine learning 
-            capabilities to provide accurate, reliable health assessments.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/1200px-Microsoft_Azure.svg.png" 
-                alt="Microsoft Azure" 
-                className="h-8 w-auto"
-              />
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1024px-Amazon_Web_Services_Logo.svg.png" 
-                alt="AWS" 
-                className="h-8 w-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
     </Layout>
   );
 };

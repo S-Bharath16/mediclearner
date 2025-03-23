@@ -1,4 +1,3 @@
-
 import React from "react";
 import { User, Building, MessageCircle, Mail } from "lucide-react";
 import Layout from "../components/Layout";
@@ -7,13 +6,22 @@ import { Separator } from "@/components/ui/separator";
 
 const About = () => {
   // Mock user data - in a real app, this would come from authentication/user profile
-  const userData = {
-    name: "John Doe",
-    role: "Healthcare Professional",
-    email: "john.doe@example.com",
-    bio: "Healthcare professional with over 10 years of experience in diagnostics and patient care. Interested in using AI to improve patient outcomes.",
-    joinedDate: "January 2023"
-  };
+  const users = [
+    {
+      name: "Bharath Shanmugavel",
+      role: "Software Engineer",
+      email: "bharathshan@outlook.com",
+      bio: "Created this project to showcase my skills in building modern web applications with React and Tailwind CSS.",
+      joinedDate: "March 2025",
+    },
+    {
+      name: "V Praneeth",
+      role: "Deployer, Tester & Security Analyst",
+      email: "cb.en.u4cse22244@cb.students.amrita.edu",
+      bio: "Ensuring the platform is secure, properly deployed, and rigorously tested for reliability.",
+      joinedDate: "March 2025",
+    },
+  ];
 
   return (
     <Layout>
@@ -61,36 +69,23 @@ const About = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="h-5 w-5 text-medical-600" />
-              User Profile
+              User Profiles
             </CardTitle>
-            <CardDescription>Your information and preferences</CardDescription>
+            <CardDescription>Meet the team behind MediPredict</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-medium text-sm text-muted-foreground mb-1">Name</h3>
-                <p>{userData.name}</p>
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-muted-foreground mb-1">Professional Role</h3>
-                <p>{userData.role}</p>
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-muted-foreground mb-1">Email</h3>
-                <p className="flex items-center gap-2">
+            {users.map((user, index) => (
+              <div key={index} className="mb-6 p-4 border rounded-lg">
+                <h3 className="text-lg font-semibold">{user.name}</h3>
+                <p className="text-sm text-muted-foreground">{user.role}</p>
+                <p className="flex items-center gap-2 mt-2">
                   <Mail className="h-4 w-4 text-medical-600" />
-                  {userData.email}
+                  {user.email}
                 </p>
+                <p className="text-sm mt-2">{user.bio}</p>
+                <p className="text-xs text-muted-foreground mt-2">Member Since: {user.joinedDate}</p>
               </div>
-              <div>
-                <h3 className="font-medium text-sm text-muted-foreground mb-1">Bio</h3>
-                <p className="text-sm">{userData.bio}</p>
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-muted-foreground mb-1">Member Since</h3>
-                <p>{userData.joinedDate}</p>
-              </div>
-            </div>
+            ))}
           </CardContent>
         </Card>
       </div>
@@ -142,9 +137,13 @@ const About = () => {
           <CardContent>
             <p className="mb-4">
               Have questions or suggestions? Reach out to our team at 
-              <a href="mailto:support@medipredict.com" className="text-medical-600 ml-1 hover:underline">
-                support@medipredict.com
+              <a href="mailto:cb.en.u4cse22245@cb.students.amrita.edu" className="text-medical-600 ml-1 hover:underline">
+                Bharath
               </a>
+              {" "}or{" "}
+              <a href="mailto:cb.en.u4cse22244@cb.students.amrita.edu" className="text-medical-600 ml-1 hover:underline">
+                Praneeth
+              </a>.
             </p>
           </CardContent>
         </Card>
