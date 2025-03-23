@@ -30,6 +30,7 @@ const NavBar = () => {
     { name: "Heart Disease", path: "/heart" },
     { name: "Lung Cancer", path: "/lung" },
     { name: "Stroke Risk", path: "/stroke" },
+    { name: "About", path: "/about" },
   ];
 
   return (

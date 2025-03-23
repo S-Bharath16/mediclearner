@@ -1,5 +1,5 @@
 
-import { Activity, Heart, Lungs, Brain } from "lucide-react";
+import { Activity, Heart, Brain } from "lucide-react";
 import Layout from "../components/Layout";
 import ServiceCard from "../components/ServiceCard";
 
@@ -20,7 +20,7 @@ const Index = () => {
     {
       title: "Lung Cancer Risk Assessment",
       description: "Evaluate the risk of lung cancer based on symptoms and patient history.",
-      icon: Activity, // Changed from Lungs to Activity as Lungs isn't available
+      icon: Activity, // Using Activity icon as Lungs isn't available
       path: "/lung",
     },
     {
