@@ -20,7 +20,7 @@ const Index = () => {
     {
       title: "Lung Cancer Risk Assessment",
       description: "Evaluate the risk of lung cancer based on symptoms and patient history.",
-      icon: Lungs,
+      icon: Activity, // Changed from Lungs to Activity as Lungs isn't available
       path: "/lung",
     },
     {
