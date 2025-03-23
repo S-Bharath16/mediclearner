@@ -154,7 +154,7 @@ const HeartDiseasePrediction = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="fastingBS">Fasting Blood Sugar > 120 mg/dL</Label>
+                    <Label htmlFor="fastingBS">Fasting Blood Sugar &gt; 120 mg/dL</Label>
                     <RadioGroup
                       value={formData.fastingBS ? "yes" : "no"}
                       onValueChange={(value) => handleChange("fastingBS", value === "yes")}
