@@ -5,8 +5,8 @@ import PredictionResult from "../components/PredictionResult";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { diabetesModel, predict } from "../utils/logisticRegression";
 
 interface FormData {
   age: number;
@@ -46,13 +46,25 @@ const DiabetesPrediction = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call to ML service
+    // Simulate API latency for a more realistic experience
     setTimeout(() => {
-      // Mock prediction result - in a real app, this would come from Azure/AWS
-      const mockProbability = Math.random() * 0.7;
+      // Use our logistic regression model to make a prediction
+      const features = {
+        age: formData.age,
+        glucose: formData.glucose,
+        bmi: formData.bmi,
+        bloodPressure: formData.bloodPressure,
+        insulin: formData.insulin,
+        skinThickness: formData.skinThickness,
+        // Only include pregnancies for females
+        ...(formData.gender === "female" ? { pregnancies: formData.pregnancies } : {})
+      };
+      
+      const prediction = predict(diabetesModel, features);
+      
       setResult({
-        isPositive: mockProbability > 0.3,
-        probability: mockProbability,
+        isPositive: prediction.isPositive,
+        probability: prediction.probability,
       });
       setIsLoading(false);
     }, 1500);

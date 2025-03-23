@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Layout from "../components/Layout";
 import PredictionResult from "../components/PredictionResult";
@@ -7,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { strokeModel, predict } from "../utils/logisticRegression";
 
 interface FormData {
   age: number;
@@ -50,25 +50,23 @@ const StrokeRiskPrediction = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call to ML service
+    // Simulate API latency for a more realistic experience
     setTimeout(() => {
-      // Mock prediction result - in a real app, this would come from Azure/AWS
-      const riskFactors = [
-        formData.age > 60,
-        formData.hypertension, 
-        formData.heartDisease, 
-        formData.smoking !== "never",
-        formData.glucose > 120,
-        formData.bmi > 30
-      ].filter(Boolean).length;
+      // Use our logistic regression model to make a prediction
+      const features = {
+        age: formData.age,
+        hypertension: formData.hypertension,
+        heartDisease: formData.heartDisease,
+        glucose: formData.glucose,
+        bmi: formData.bmi,
+        smoking: formData.smoking
+      };
       
-      // Higher probability based on risk factors
-      const baseProbability = 0.1 + (riskFactors * 0.05);
-      const mockProbability = Math.min(Math.max(baseProbability + (Math.random() * 0.2 - 0.1), 0), 0.7);
+      const prediction = predict(strokeModel, features);
       
       setResult({
-        isPositive: mockProbability > 0.3,
-        probability: mockProbability,
+        isPositive: prediction.isPositive,
+        probability: prediction.probability,
       });
       setIsLoading(false);
     }, 1500);
