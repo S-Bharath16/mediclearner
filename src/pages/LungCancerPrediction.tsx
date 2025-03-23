@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { lungCancerModel, predict } from "../utils/logisticRegression";
 
 interface FormData {
   age: number;
@@ -77,23 +78,25 @@ const LungCancerPrediction = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call to ML service
+    // Simulate API latency for a more realistic experience
     setTimeout(() => {
-      // Mock prediction result - in a real app, this would come from Azure/AWS
-      const riskFactors = [
-        formData.smoking, 
-        formData.yellowFingers, 
-        formData.coughing, 
-        formData.shortnessOfBreath
-      ].filter(Boolean).length;
+      // Use our logistic regression model to make a prediction
+      const features = {
+        age: formData.age,
+        smoking: formData.smoking,
+        smokingYears: formData.smokingYears || 0,
+        yellowFingers: formData.yellowFingers,
+        anxiety: formData.anxiety,
+        coughing: formData.coughing,
+        shortnessOfBreath: formData.shortnessOfBreath,
+        chestPain: formData.chestPain
+      };
       
-      // Higher probability based on risk factors
-      const baseProbability = 0.1 + (riskFactors * 0.1);
-      const mockProbability = Math.min(Math.max(baseProbability + (Math.random() * 0.2 - 0.1), 0), 1);
+      const prediction = predict(lungCancerModel, features);
       
       setResult({
-        isPositive: mockProbability > 0.3,
-        probability: mockProbability,
+        isPositive: prediction.isPositive,
+        probability: prediction.probability,
       });
       setIsLoading(false);
     }, 1500);

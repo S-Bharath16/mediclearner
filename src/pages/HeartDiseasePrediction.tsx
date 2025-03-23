@@ -5,9 +5,9 @@ import PredictionResult from "../components/PredictionResult";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { heartDiseaseModel, predict } from "../utils/logisticRegression";
 
 interface FormData {
   age: number;
@@ -49,13 +49,24 @@ const HeartDiseasePrediction = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call to ML service
+    // Simulate API latency for a more realistic experience
     setTimeout(() => {
-      // Mock prediction result - in a real app, this would come from Azure/AWS
-      const mockProbability = Math.random() * 0.6;
+      // Use our logistic regression model to make a prediction
+      const features = {
+        age: formData.age,
+        restingBP: formData.restingBP,
+        cholesterol: formData.cholesterol,
+        fastingBS: formData.fastingBS,
+        maxHR: formData.maxHR,
+        exerciseAngina: formData.exerciseAngina,
+        chestPainType: formData.chestPain
+      };
+      
+      const prediction = predict(heartDiseaseModel, features);
+      
       setResult({
-        isPositive: mockProbability > 0.3,
-        probability: mockProbability,
+        isPositive: prediction.isPositive,
+        probability: prediction.probability,
       });
       setIsLoading(false);
     }, 1500);
