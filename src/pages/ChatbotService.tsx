@@ -6,65 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { SendHorizontal, Bot, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-interface ChatMessage {
-  sender: "user" | "bot";
-  content: string;
-  timestamp: Date;
-}
+import { useChatbot } from "@/hooks/use-chatbot";
 
 const ChatbotService = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      sender: "bot",
-      content: "Hello! I'm your medical assistant. How can I help you today?",
-      timestamp: new Date(),
-    },
-  ]);
+  const { messages, isLoading, sendMessage } = useChatbot();
   const [inputMessage, setInputMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
 
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
-    
-    // Add user message to chat
-    const userMessage: ChatMessage = {
-      sender: "user",
-      content: inputMessage,
-      timestamp: new Date(),
-    };
-    
-    setMessages((prev) => [...prev, userMessage]);
+    await sendMessage(inputMessage);
     setInputMessage("");
-    setIsLoading(true);
-
-    // In a real implementation, this would be a call to AWS services
-    // such as Amazon Lex or Amazon Bedrock
-    try {
-      // Simulating API call to AWS services
-      setTimeout(() => {
-        const botResponse: ChatMessage = {
-          sender: "bot",
-          content: "I understand your concern. Based on your symptoms, I recommend scheduling an appointment with a specialist. Would you like more information?",
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, botResponse]);
-        setIsLoading(false);
-      }, 1000);
-      
-      // Mock AWS service integration
-      // For actual implementation, you would use AWS SDK
-      // aws-sdk/client-lexruntimev2 for Lex or aws-sdk/client-bedrock-runtime for Bedrock
-      
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to connect to chatbot service",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -152,7 +103,7 @@ const ChatbotService = () => {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Powered by AWS AI services. This is a simulation for demonstration purposes.
+              Powered by Azure AI services. This is a demonstration of medical assistant chatbot.
             </p>
           </div>
         </div>
