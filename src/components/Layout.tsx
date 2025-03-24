@@ -2,6 +2,7 @@
 import { ReactNode } from "react";
 import NavBar from "./NavBar";
 import FloatingChatbot from "./FloatingChatbot";
+import HistoryTab from "./HistoryTab";
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       </footer>
       <FloatingChatbot />
+      <HistoryTab />
     </div>
   );
 };
