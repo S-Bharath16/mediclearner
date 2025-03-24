@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Layout from "../components/Layout";
 import PredictionResult from "../components/PredictionResult";
@@ -7,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { strokeModel, predict } from "../utils/logisticRegression";
+import { useHistory } from "@/hooks/use-history";
 
 interface FormData {
   age: number;
@@ -38,6 +40,7 @@ const StrokeRiskPrediction = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [result, setResult] = useState<{ isPositive: boolean; probability: number } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { addToHistory } = useHistory();
 
   const handleChange = (field: keyof FormData, value: any) => {
     setFormData((prev) => ({
@@ -64,10 +67,16 @@ const StrokeRiskPrediction = () => {
       
       const prediction = predict(strokeModel, features);
       
-      setResult({
+      const predictionResult = {
         isPositive: prediction.isPositive,
         probability: prediction.probability,
-      });
+      };
+      
+      setResult(predictionResult);
+      
+      // Save prediction to history
+      addToHistory('stroke', formData, predictionResult);
+      
       setIsLoading(false);
     }, 1500);
   };
