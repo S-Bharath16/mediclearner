@@ -4,17 +4,12 @@ import {
   getAllPredictions, 
   getPredictionsByType, 
   savePrediction, 
-  deletePrediction 
+  deletePrediction,
+  PredictionHistoryItem
 } from '@/utils/database';
 import { useToast } from '@/hooks/use-toast';
 
-export type PredictionHistoryItem = {
-  id: number;
-  prediction_type: string;
-  input_data: any;
-  result: any;
-  created_at: string;
-};
+export type { PredictionHistoryItem };
 
 export function useHistory() {
   const [history, setHistory] = useState<PredictionHistoryItem[]>([]);

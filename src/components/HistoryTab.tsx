@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Clock, Trash2, ChevronDown, ChevronRight, Filter } from 'lucide-react';
+import { Clock, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
 import { useHistory, PredictionHistoryItem } from '@/hooks/use-history';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -19,12 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { initDatabase } from '@/utils/database';
 
 type PredictionType = 'all' | 'diabetes' | 'heart' | 'lung' | 'stroke';

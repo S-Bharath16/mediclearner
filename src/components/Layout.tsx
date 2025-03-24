@@ -1,14 +1,25 @@
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import NavBar from "./NavBar";
 import FloatingChatbot from "./FloatingChatbot";
 import HistoryTab from "./HistoryTab";
+import { initDatabase, initChatHistory } from "@/utils/database";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  // Initialize the database when the layout mounts
+  useEffect(() => {
+    const initializeStorage = async () => {
+      await initDatabase();
+      await initChatHistory();
+    };
+    
+    initializeStorage();
+  }, []);
+  
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <NavBar />
