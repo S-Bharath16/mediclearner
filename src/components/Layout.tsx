@@ -2,7 +2,7 @@
 import { ReactNode, useEffect } from "react";
 import NavBar from "./NavBar";
 import FloatingChatbot from "./FloatingChatbot";
-import HistoryTab from "./HistoryTab";
+import HistoryTab from "./history";
 import { initDatabase, initChatHistory } from "@/utils/database";
 
 interface LayoutProps {
