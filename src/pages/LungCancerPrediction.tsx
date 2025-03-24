@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { lungCancerModel, predict } from "../utils/logisticRegression";
+import { useHistory } from "@/hooks/use-history";
 
 interface FormData {
   age: number;
@@ -66,6 +67,7 @@ const LungCancerPrediction = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [result, setResult] = useState<{ isPositive: boolean; probability: number } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { addToHistory } = useHistory();
 
   const handleChange = (field: keyof FormData, value: any) => {
     setFormData((prev) => ({
@@ -94,10 +96,16 @@ const LungCancerPrediction = () => {
       
       const prediction = predict(lungCancerModel, features);
       
-      setResult({
+      const predictionResult = {
         isPositive: prediction.isPositive,
         probability: prediction.probability,
-      });
+      };
+      
+      setResult(predictionResult);
+      
+      // Save prediction to history
+      addToHistory('lung', formData, predictionResult);
+      
       setIsLoading(false);
     }, 1500);
   };
