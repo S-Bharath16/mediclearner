@@ -110,6 +110,11 @@ const NavBar = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button onClick={signOut} className="block px-2 py-2 text-base text-muted-foreground">
+                  Logout
+                </button>
+              </li>
             </ul>
           </nav>
         )}
