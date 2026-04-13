@@ -83,7 +83,7 @@ const Signup = () => {
 
       toast({
         title: "Account created!",
-        description: "Please check your email to verify your account.",
+        description: "You are now signed in.",
       });
     } catch (error: any) {
       toast({ title: "Signup failed", description: error.message, variant: "destructive" });
