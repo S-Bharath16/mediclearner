@@ -72,6 +72,10 @@ const NavBar = () => {
                 )}
               </Link>
             ))}
+            <Button variant="ghost" size="sm" onClick={signOut} className="text-muted-foreground hover:text-foreground gap-1">
+              <LogOut className="h-4 w-4" />
+              Logout
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
