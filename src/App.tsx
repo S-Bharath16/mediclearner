@@ -4,7 +4,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import DiabetesPrediction from "./pages/DiabetesPrediction";
 import HeartDiseasePrediction from "./pages/HeartDiseasePrediction";
 import LungCancerPrediction from "./pages/LungCancerPrediction";
@@ -21,17 +25,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/diabetes" element={<DiabetesPrediction />} />
-          <Route path="/heart" element={<HeartDiseasePrediction />} />
-          <Route path="/lung" element={<LungCancerPrediction />} />
-          <Route path="/stroke" element={<StrokeRiskPrediction />} />
-          <Route path="/chatbot" element={<ChatbotService />} />
-          <Route path="/about" element={<About />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+            <Route path="/diabetes" element={<ProtectedRoute><DiabetesPrediction /></ProtectedRoute>} />
+            <Route path="/heart" element={<ProtectedRoute><HeartDiseasePrediction /></ProtectedRoute>} />
+            <Route path="/lung" element={<ProtectedRoute><LungCancerPrediction /></ProtectedRoute>} />
+            <Route path="/stroke" element={<ProtectedRoute><StrokeRiskPrediction /></ProtectedRoute>} />
+            <Route path="/chatbot" element={<ProtectedRoute><ChatbotService /></ProtectedRoute>} />
+            <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -1,9 +1,12 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ActivitySquare, Menu, X } from "lucide-react";
+import { ActivitySquare, Menu, X, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const NavBar = () => {
+  const { signOut, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -69,6 +72,10 @@ const NavBar = () => {
                 )}
               </Link>
             ))}
+            <Button variant="ghost" size="sm" onClick={signOut} className="text-muted-foreground hover:text-foreground gap-1">
+              <LogOut className="h-4 w-4" />
+              Logout
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -103,6 +110,11 @@ const NavBar = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button onClick={signOut} className="block px-2 py-2 text-base text-muted-foreground">
+                  Logout
+                </button>
+              </li>
             </ul>
           </nav>
         )}
