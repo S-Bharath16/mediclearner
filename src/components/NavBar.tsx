@@ -1,7 +1,9 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ActivitySquare, Menu, X } from "lucide-react";
+import { ActivitySquare, Menu, X, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
