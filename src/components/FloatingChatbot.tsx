@@ -87,7 +87,7 @@ const FloatingChatbot = () => {
     }
 
     // Poll for messages when conversation is active
-    let intervalId: NodeJS.Timeout;
+    let intervalId: ReturnType<typeof setInterval>;
     if (isOpen && conversationId && !isOfflineMode) {
       intervalId = setInterval(fetchMessages, 2000);
     }
